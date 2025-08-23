@@ -14,8 +14,14 @@ import Shoppinghome from "./Pages/shopping-view/home"
 import Shoppinglisting from "./Pages/shopping-view/listing"
 import Shoppingaccount from "./Pages/shopping-view/account"
 import Shoppingcheckout from "./Pages/shopping-view/checkout"
+import CheckAuth from "./components/Comman/checkauth";
 
 function App() {
+  const auth = true;
+  const user = {
+   name : 'gagan',
+   role : 'admin'
+  }
   return (
     <div className="flex flex-col overflow-hidden bg-white">
       <Routes>
@@ -25,14 +31,16 @@ function App() {
           <Route path="signup" element={<AuthSignup />} />
         </Route>
         {/* admin route */}
-        <Route path="/admin" element={<Adminlayout />}>
+        <Route path="/admin" element={
+          <CheckAuth isAuth={auth} user={user}> <Adminlayout /> </CheckAuth> }>
           <Route path="dashboard" element={<AdminDashboard/>} />
           <Route path="order" element={<Adminorder />} />
           <Route path="products" element={<Adminproducts />} />
           <Route path="feature" element={<Adminfeature />} />
         </Route>
         {/* shopping route */}
-         <Route path="/shop" element={<ShoppingLayout/>}>
+         <Route path="/shop" element={
+          <CheckAuth isAuth={auth} user={user}> <ShoppingLayout/> </CheckAuth> }>
            <Route path="home" element={<Shoppinghome/>} />
           <Route path="listing" element={<Shoppinglisting />} />
           <Route path="checkout" element={<Shoppingcheckout />} />
