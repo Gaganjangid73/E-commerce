@@ -1,15 +1,14 @@
 import React from "react";
 import { Label } from "@radix-ui/react-label";
-import { Input } from "@/components/ui/input"; // ✅ Adjust path if using Shadcn
-import { Textarea } from "@/components/ui/textarea"; // ✅ Adjust path
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectTrigger,
   SelectValue,
   SelectContent,
   SelectItem,
-} from "@radix-ui/react-select"; // or from shadcn/ui if you use that
-
+} from "@/components/ui/select";
 const Form = ({ formcontrols }) => {
   function renderInputsByComponentType(control) {
     let element = null;
@@ -33,17 +32,19 @@ const Form = ({ formcontrols }) => {
               <SelectValue placeholder={control.placeholder} />
             </SelectTrigger>
             <SelectContent>
-              {control.options?.map((option) => (
-                <SelectItem key={option.id} value={option.id}>
-                  {option.label}
-                </SelectItem>
-              ))}
+              {control.options && control.options.length > 0
+                ? control.options.map((optionitem) => (
+                    <SelectItem key={optionitem.id} value={optionitem.id}>
+                      {optionitem.label}
+                    </SelectItem>
+                  ))
+                : null}
             </SelectContent>
           </Select>
         );
         break;
 
-      case "textarea": 
+      case "textarea":
         element = (
           <Textarea
             id={control.name}
