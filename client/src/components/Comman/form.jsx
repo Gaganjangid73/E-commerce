@@ -47,9 +47,10 @@ const Form = ({ formcontrols }) => {
       case "textarea":
         element = (
           <Textarea
-            id={control.name}
             name={control.name}
             placeholder={control.placeholder}
+            id ={control.id}
+            
           />
         );
         break;
