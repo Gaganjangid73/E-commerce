@@ -9,9 +9,10 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-const Form = ({ formcontrols }) => {
+const Form = ({ formcontrols , formData, setformData, onSubmit, buttonText}) => {
   function renderInputsByComponentType(control) {
     let element = null;
+    const value = formData[control.name] || "";
 
     switch (control.componentType) {
       case "input":
@@ -21,13 +22,21 @@ const Form = ({ formcontrols }) => {
             name={control.name}
             type={control.type || "text"}
             placeholder={control.placeholder}
+            value={value}
+            onChange={event=> setformData({
+              ...formData,
+              [control.name] : event.target.value,
+            })}
           />
         );
         break;
 
       case "select":
         element = (
-          <Select>
+          <Select value={value} onValueChange={(value)=> setformData({
+            ...formData,
+            [control.name] : value
+          })}>
             <SelectTrigger className="w-full">
               <SelectValue placeholder={control.placeholder} />
             </SelectTrigger>
@@ -50,7 +59,11 @@ const Form = ({ formcontrols }) => {
             name={control.name}
             placeholder={control.placeholder}
             id ={control.id}
-            
+            value={value}
+             onChange={event=> setformData({
+              ...formData,
+              [control.name] : event.target.value,
+            })}
           />
         );
         break;
@@ -70,7 +83,7 @@ const Form = ({ formcontrols }) => {
   }
 
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <div className="flex flex-col gap-3">
         {formcontrols.map((control) => (
           <div key={control.name} className="grid w-full gap-1.5">
@@ -79,6 +92,7 @@ const Form = ({ formcontrols }) => {
           </div>
         ))}
       </div>
+      <button type="submit" className="mt-2 w-full">{buttonText || 'Submit'} </button>
     </form>
   );
 };
