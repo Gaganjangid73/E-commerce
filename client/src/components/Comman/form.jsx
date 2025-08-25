@@ -92,7 +92,7 @@ const Form = ({ formcontrols , formData, setformData, onSubmit, buttonText}) => 
           </div>
         ))}
       </div>
-      <button type="submit" className="mt-2 w-full">{buttonText || 'Submit'} </button>
+      <button type="submit" className="mt-5 rounded-2xl w-full h-11 bg-black text-white">{buttonText || 'Submit'} </button>
     </form>
   );
 };

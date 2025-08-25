@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Form from "../../components/Comman/form"; // Corrected import: should be capitalized for a component
-import { registerFormControls } from "../../config/index"; // Make sure the path is correct
+import Form from "../../components/Comman/form"; 
+import { registerFormControls } from "../../config/index";
 
 const initialState = {
   userName: "",
@@ -23,7 +23,7 @@ const AuthSignup = () => {
     <div className="mx-auto w-full max-w-md space-y-6">
       <div className="text-center">
         <h1 className="text-3xl font-bold tracking-tighter text-foreground">
-          Create New Account
+          Create New Account 🚀
         </h1>
         <p className="mt-2">
           Already Have an Account?
