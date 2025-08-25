@@ -2,11 +2,16 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+require('dotenv').config();
+const authrouter = require('./routes/auth/auth_routes');
 
 // create a database
+if (!process.env.MONGODB_URI) {
+  console.warn('MONGODB_URI is not set. Please configure it in your environment.');
+}
+
 mongoose
-  .connect(
-    "mongodb+srv://gagancoding70:Gagan%4002@e-commerce.umw9msj.mongodb.net/e-commerce")
+  .connect(process.env.MONGODB_URI || '')
   .then(() => console.log("MongoDB Connected"))
   .catch((error) => console.log(error));
 
@@ -29,5 +34,6 @@ app.use(
 
     app.use(cookieParser());
     app.use(express.json());
+    app.use("/api/auth", authrouter)
 
-    app.listen(PORT, ()=> console.log('server is now running on PORT'));
+    app.listen(PORT, ()=> console.log(`Server is running on http://localhost:${PORT}`));
