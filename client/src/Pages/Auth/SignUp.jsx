@@ -14,8 +14,6 @@ const AuthSignup = () => {
 
   function onSubmit(e) {
     e.preventDefault();
-    // Add your signup logic here
-    // For now, just log the form data
     console.log(formData);
   }
 
