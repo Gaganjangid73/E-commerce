@@ -46,3 +46,6 @@ const login = async (req, res) => {
 };
 
 module.exports = { registeruser, login };
+
+
+/// now we are working on signup api connection with frontend
