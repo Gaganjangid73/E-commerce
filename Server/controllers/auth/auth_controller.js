@@ -41,17 +41,20 @@ const login = async (req, res) => {
  // 1. Check if user exists
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({ success: false, message: "User not found" });
+      return res.status(401).json({ success: false, message: "User not found" });
     }
 
   // 2. Compare password with hashed password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(401).json({ success: false, message: "Invalid password" });
+      return res.status(401).json({ success: false, message: "Invalid Credentials" });
     }
 
-    // if you want to add 
-    return res.status(501).json({ success: true, message: 'Invalid credentials' });
+    // if you want to add  JWT (optional but recommended )
+    //******************************************************/
+
+    // success response...
+    return res.status(200).json({ success: true, message: 'Login Succesfully' });
   } catch (e) {
     console.log(e);
     res.status(500).json({
