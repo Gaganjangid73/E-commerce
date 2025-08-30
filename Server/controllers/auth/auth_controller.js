@@ -4,7 +4,7 @@ const User = require("../../models/user");
 
 //signup
 const registeruser = async (req, res) => {
-  const { username, email, password } = req.body || {};
+  const { username, email, password } = req.body;
   try {
     if (!username || !email || !password) {
       return res.status(400).json({ success: false, message: 'Missing fields' });
@@ -34,8 +34,24 @@ const registeruser = async (req, res) => {
 
 //login (placeholder)
 const login = async (req, res) => {
+
+   const{email,password} = req.body;
+
   try {
-    return res.status(501).json({ success: false, message: 'Not implemented' });
+ // 1. Check if user exists
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ success: false, message: "User not found" });
+    }
+
+  // 2. Compare password with hashed password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ success: false, message: "Invalid password" });
+    }
+
+    // if you want to add 
+    return res.status(501).json({ success: true, message: 'Invalid credentials' });
   } catch (e) {
     console.log(e);
     res.status(500).json({

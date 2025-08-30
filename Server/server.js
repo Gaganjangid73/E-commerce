@@ -34,6 +34,8 @@ app.use(
 
     app.use(cookieParser());
     app.use(express.json());
-    app.use("/api/auth", authrouter)
+    app.use("/api/auth", authrouter);
+
+ 
 
     app.listen(PORT, ()=> console.log(`Server is running on http://localhost:${PORT}`));
