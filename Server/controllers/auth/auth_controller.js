@@ -6,6 +6,7 @@ const User = require("../../models/user");
 const registeruser = async (req, res) => {
   const { username, email, password } = req.body;
   try {
+    
     if (!username || !email || !password) {
       return res.status(400).json({ success: false, message: 'Missing fields' });
     }
